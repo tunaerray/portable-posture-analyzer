@@ -2,45 +2,70 @@
 
 A wearable device designed to monitor back and shoulder posture in real time, alerting the user via vibration and OLED display when poor posture is detected.
 
-> Work in Progress - PCB design is complete. Firmware development is ongoing.
->
-> ## Overview
->
-> This project is a health and ergonomics-focused embedded system that tracks posture using an IMU sensor. When poor posture is detected, the device triggers a vibration motor and sends a daily Bluetooth report to a paired device. The system is built around the MSP430G2553 microcontroller.
->
-> ## Components
->
-> - **MPU6050** - 6-axis IMU (accelerometer + gyroscope)
-> - - **Vibration Motor** - Haptic alert for bad posture
->   - - **OLED Display** - Real-time posture score display
->     - - **HC-05 Bluetooth** - Daily report transmission
->       - - **MSP430G2553** - Main microcontroller
->        
->         - ## MSP430G2553 Peripheral Mapping
->        
->         - | Peripheral | Function |
->         - |---|---|
->         - | USCI_B0 | I2C - MPU6050 and OLED |
-> | Timer_A | Score period control |
-> | GPIO | Vibration motor control |
->
-> ### Pin Connections
->
-> - MPU6050 -> P1.6 (SCL), P1.7 (SDA)
-> - - Vibration Motor -> P2.0
->   - - OLED -> Same I2C bus (different address)
->     - - Bluetooth HC-05 -> P1.1 (RX), P1.2 (TX)
->      
->       - ## How It Works
->      
->       - 1. MPU6050 raw data is read and processed using atan2 for angle calculation
->         2. 2. A posture score is computed every 30 seconds via Timer_A
->            3. 3. If poor posture is detected: vibration motor + OLED alert triggered
->               4. 4. Daily posture report is sent via Bluetooth
->                 
->                  5. ## Project Status
->                 
->                  6. - [x] PCB design complete
->                     - [ ] - [ ] Firmware development in progress
->                     - [ ] - [ ] Testing and calibration
->                     - [ ] - [ ] Enclosure design
+> **Work in Progress**  
+> PCB design is complete. Firmware development is ongoing.
+
+## Overview
+
+This project is a health and ergonomics-focused embedded system that tracks posture using an IMU sensor. When poor posture is detected, the device triggers a vibration motor and displays a warning on the OLED screen. The system is built around the MSP430G2553 microcontroller.
+
+## Components
+
+- **MPU6050** - 6-axis IMU sensor (accelerometer + gyroscope)
+- **Vibration Motor** - Haptic alert for poor posture
+- **OLED Display** - Real-time posture score and warning display
+- **HC-05 Bluetooth** - Daily report transmission
+- **MSP430G2553** - Main microcontroller
+
+## MSP430G2553 Peripheral Mapping
+
+| Peripheral | Function |
+|---|---|
+| USCI_B0 | I2C communication with MPU6050 and OLED |
+| Timer_A | Posture score period control |
+| GPIO | Vibration motor control |
+| USCI_A0 | UART communication with HC-05 Bluetooth module |
+
+## Pin Connections
+
+- **MPU6050**
+  - SCL -> P1.6
+  - SDA -> P1.7
+
+- **OLED Display**
+  - SCL -> P1.6
+  - SDA -> P1.7
+  - Uses the same I2C bus as the MPU6050 with a different I2C address
+
+- **Vibration Motor**
+  - Control Pin -> P2.0
+
+- **Bluetooth HC-05**
+  - RX -> P1.2
+  - TX -> P1.1
+
+## How It Works
+
+1. MPU6050 raw accelerometer and gyroscope data is read over I2C.
+2. Angle calculation is performed using `atan2`.
+3. A posture score is computed periodically using Timer_A.
+4. If poor posture is detected, the vibration motor is activated.
+5. The OLED display shows posture status and warning messages.
+6. A daily posture report is sent via Bluetooth to a paired device.
+
+## Project Status
+
+- [x] PCB design complete
+- [ ] Firmware development in progress
+- [ ] Testing and calibration
+- [ ] Enclosure design
+
+## Images
+
+### PCB Front
+
+![PCB Front](pcb/images/pcb_front.jpeg)
+
+### PCB Back
+
+![PCB Back](pcb/images/pcb_back.jpeg)
