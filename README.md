@@ -17,15 +17,6 @@ This project is a health and ergonomics-focused embedded system that tracks post
 - **HC-05 Bluetooth** - Daily report transmission
 - **MSP430G2553** - Main microcontroller
 
-## MSP430G2553 Peripheral Mapping
-
-| Peripheral | Function |
-|---|---|
-| USCI_B0 | I2C communication with MPU6050 and OLED |
-| Timer_A | Posture score period control |
-| GPIO | Vibration motor control |
-| USCI_A0 | UART communication with HC-05 Bluetooth module |
-
 ## Pin Connections
 
 - **MPU6050**
