@@ -17,24 +17,6 @@ This project is a health and ergonomics-focused embedded system that tracks post
 - **HC-05 Bluetooth** - Daily report transmission
 - **MSP430G2553** - Main microcontroller
 
-## Pin Connections
-
-- **MPU6050**
-  - SCL -> P1.6
-  - SDA -> P1.7
-
-- **OLED Display**
-  - SCL -> P1.6
-  - SDA -> P1.7
-  - Uses the same I2C bus as the MPU6050 with a different I2C address
-
-- **Vibration Motor**
-  - Control Pin -> P2.0
-
-- **Bluetooth HC-05**
-  - RX -> P1.2
-  - TX -> P1.1
-
 ## How It Works
 
 1. MPU6050 raw accelerometer and gyroscope data is read over I2C.
